@@ -117,7 +117,7 @@ angular
     url: '/500',
     templateUrl: 'views/pages/500.html'
   })
-  .state('bandas', {
+  .state('app.bandas', {
     url: '/bandas',
     templateUrl: 'views/bands.html',
     ncyBreadcrumb: {
