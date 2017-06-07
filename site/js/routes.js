@@ -119,10 +119,42 @@ angular
   })
   .state('app.bandas', {
     url: '/bandas',
-    templateUrl: 'views/bands.html',
+    templateUrl: 'views/bandas.html',
     ncyBreadcrumb: {
       label: 'Bandas'
     },
     controller : 'bandController'
+  })
+  .state('app.festival', {
+    url: '/festival',
+    templateUrl: 'views/festival.html',
+    ncyBreadcrumb: {
+      label: 'Festivales'
+    },
+    controller : ''
+  })
+  .state('app.cartelera', {
+    url: '/cateleras',
+    templateUrl: 'views/cartelera.html',
+    ncyBreadcrumb: {
+      label: 'Carteleras'
+    },
+    controller : ''
+  })
+  .state('app.perfil', {
+    url: '/perfil',
+    templateUrl: 'views/perfil.html',
+    ncyBreadcrumb: {
+      label: 'My Perfil'
+    },
+    controller : ''
+  })
+  .state('app.inicio', {
+    url: '/inicio',
+    templateUrl: 'views/inicio.html',
+    ncyBreadcrumb: {
+      label: 'Inicio'
+    },
+    controller : ''
   })
 }]);
