@@ -117,4 +117,12 @@ angular
     url: '/500',
     templateUrl: 'views/pages/500.html'
   })
+  .state('bandas', {
+    url: '/bandas',
+    templateUrl: 'views/bands.html',
+    ncyBreadcrumb: {
+      label: 'Bandas'
+    },
+    controller : 'bandController'
+  })
 }]);
