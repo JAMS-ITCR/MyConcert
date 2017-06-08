@@ -51,8 +51,8 @@ angular
     }
   })
   .state('app.main', {
-    url: '/dashboard',
-    templateUrl: 'views/main.html',
+    url: '/home',
+    templateUrl: 'views/home.html',
     //page title goes here
     ncyBreadcrumb: {
       label: 'Home',
@@ -124,5 +124,13 @@ angular
       label: 'Bandas'
     },
     controller : 'bandController'
+  })
+  .state('app.home', {
+    url: '/home',
+    templateUrl: 'views/home.html',
+    ncyBreadcrumb: {
+      label: 'Home'
+    },
+    controller : 'myhomeController'
   })
 }]);
