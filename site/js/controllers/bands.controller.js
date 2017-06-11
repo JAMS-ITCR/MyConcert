@@ -3,5 +3,5 @@ angular
 .controller('bandController', bandController);
 bandController.$inject = ['$scope'];
  function bandController ($scope) {
-  $scope.data = "Hola Mundo";
+  $scope.data = "Hola pinche";
 };

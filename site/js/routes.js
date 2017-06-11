@@ -101,10 +101,6 @@ angular
   })
 
   // Additional Pages
-  .state('appSimple.login', {
-    url: '/login',
-    templateUrl: 'views/pages/login.html'
-  })
   .state('appSimple.register', {
     url: '/register',
     templateUrl: 'views/pages/register.html'
@@ -124,6 +120,11 @@ angular
       label: 'Bandas'
     },
     controller : 'bandController'
+  })
+  .state('appSimple.login', {
+    url: '/login',
+    templateUrl: 'views/pages/login.html',
+    controller : 'loginController'
   })
   .state('app.festival', {
     url: '/festival',
