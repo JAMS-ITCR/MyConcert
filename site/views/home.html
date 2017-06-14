@@ -1,34 +1,34 @@
 <head>
-  <!--
-  <script src="site/js/controllers/home.controller.js"></script>-->
   <link rel="stylesheet" type="text/css" href="css/home_style.css">
 </head>
 
-<div ng-app="homeApp" ng-controller= "myhomeController">
+<div ng-controller= "myhomeController">
 <h1> {{mywelcome}} </h1>
-  <h2>{{estado}}</h2>
+<h3>{{prueba}}</h3>
     <div>
-        <h2>Cartleras</h2>
-        <button type="button" name="button">previous</button>
+      <h2>Carteleras</h2>
         <div class="show_items">
           <div class="show_items">
-            <img src="http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png" alt="logo" style="with=100">
+            <button  class ="side_arrow" ng-click="getCarteles('previous')"><img src="img/arrowleft.png" width="40" height="150"></button>
+            <img src={{cartelera[0].imagen}} alt="logo" height="300" width="300" ng-click="showCartel(cartelera[0])">
             <br>
-            <button type="button" name="button">Cartelera 1</button>
+            <h3 class="primer_nombre">{{cartelera[0].nombre}}</h3>
           </div>
           <div class="show_items">
-            <img src="http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png" alt="logo" style="with=100">
+            <img src={{cartelera[1].imagen}} alt="logo" height="300" width="300" ng-click="showCartel(cartelera[1])">
             <br>
-            <button type="button" name="button">Cartelera 2</button>
+            <h3>{{cartelera[1].nombre}}</h3>
           </div>
           <div class="show_items">
-            <img src="http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png" alt="logo" style="with=100">
+            <img src={{cartelera[2].imagen}} alt="logo" height="300" width="300" ng-click="showCartel(cartelera[2])">
+            <button class ="side_arrow" ng-click="getCarteles('next')"><img src="img/arrowright.png" width="40" height="150"></button>
             <br>
-            <button type="button" name="button">Cartelera 3</button>
+            <h3>{{cartelera[2].nombre}}</h3>
           </div>
         </div>
-        <button type="button" name="button">next</button>
       </div>
+      <br>
+      <button class="plus" ng-show="admi"><img src="img/plus_icon.png" width="30" height="40"></button>
       <br>
       <div>
         <h2>Festival</h2>

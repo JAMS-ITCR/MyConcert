@@ -2,3 +2,16 @@ div.show_items{
   align-items: center;
   display: inline-block;
 }
+button.side_arrow{
+  margin: 90px 0px 0px 0px;
+  vertical-align: top;
+}
+button.plus{
+  position: absolute;
+  right: 150px;
+}
+
+margin: -40px 0px 0px 0px;
+h3.primer_nombre{
+    margin:0px 0px 0px 70px;
+}
