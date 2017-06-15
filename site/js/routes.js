@@ -133,4 +133,12 @@ angular
     },
     controller : 'myhomeController'
   })
+  .state('app.cartelera', {
+    url: '/cartelera/:param',
+    templateUrl: 'views/cartelera/:param.html',
+    ncyBreadcrumb: {
+      label: 'Home'
+    },
+    controller : 'myhomeController'
+  })
 }]);
