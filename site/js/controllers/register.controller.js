@@ -1,12 +1,13 @@
 angular
 .module('app')
-.controller('loginController', loginController);
-loginController.$inject = ['$scope','$http','$window'];
- function loginController ($scope,$http,$window) {
+.controller('registerController', registerController);
+registerController.$inject = ['$scope','$http','$window'];
+ function registerController ($scope,$http,$window) {
    $scope.userName = "";
-   $scope.passWord = "";
-   if(sessionStorage.length>0 && JSON.parse(sessionStorage.user) &&  JSON.parse(sessionStorage.priv)){
-     $window.location.href = '/#!/home';
+   $scope.pass= "";
+   $scope.repass= "";
+   if(!JSON.parse(sessionStorage.user) || !JSON.parse(sessionStorage.priv)){
+     $window.location.href = '/#!/login';
    }
    $scope.log = function(userName, passWord) {
         var Url = "http://myconcertv2.cloudapp.net/UserService.svc/login/"+userName+"/"+passWord;

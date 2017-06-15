@@ -126,6 +126,11 @@ angular
     templateUrl: 'views/pages/login.html',
     controller : 'loginController'
   })
+  /*.state('appSimple.register', {
+    url: '/register',
+    templateUrl: 'views/pages/register.html',
+    controller : 'registerController'
+  })*/
   .state('app.festival', {
     url: '/festival',
     templateUrl: 'views/festival.html',

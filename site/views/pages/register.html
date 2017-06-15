@@ -4,31 +4,48 @@
             <div class="col-md-6">
                 <div class="card mx-4">
                     <div class="card-block p-4">
-                        <h1>Register</h1>
-                        <p class="text-muted">Create your account</p>
+                        <h1>Registro</h1>
+                        <p class="text-muted">Crear una cuenta</p>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="Username">
+                            <input type="text" ng-model="name" class="form-control" placeholder="nombre">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon"><i class="icon-user"></i>
+                            </span>
+                            <input type="text" ng-model="lastname1" class="form-control" placeholder="Primer Apellido">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon"><i class="icon-user"></i>
+                            </span>
+                            <input type="text" ng-model="lastname2" class="form-control" placeholder="Segundo apellido">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon"><i class="icon-user"></i>
+                            </span>
+                            <input type="text" ng-model="userName" class="form-control" placeholder="Usuario">
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-addon">@</span>
-                            <input type="text" class="form-control" placeholder="Email">
+                            <input type="text" class="form-control" placeholder="Correo">
                         </div>
 
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" ng-model="pass" class="form-control" placeholder="Contraseña">
                         </div>
 
                         <div class="input-group mb-4">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="password" class="form-control" placeholder="Repeat password">
+                            <input type="password" ng-model="repass" class="form-control" placeholder="Confirma Contraseña">
                         </div>
-
+                        <div class=error>
+                          {{msj}}
+                        </div>
                         <button type="button" class="btn btn-block btn-success">Create Account</button>
                     </div>
                     <div class="card-footer p-4">
