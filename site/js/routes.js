@@ -134,11 +134,11 @@ angular
     controller : 'myhomeController'
   })
   .state('app.cartelera', {
-    url: '/cartelera/:param',
-    templateUrl: 'views/cartelera/:param.html',
+    url: '/cartelera/:cartelID',
+    templateUrl: 'views/cartel.html',
     ncyBreadcrumb: {
-      label: 'Home'
+      label: 'Cartelera'
     },
-    controller : 'myhomeController'
+    controller : 'carteleraController'
   })
 }]);

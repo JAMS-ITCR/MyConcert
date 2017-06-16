@@ -7,18 +7,17 @@ angular
   var position = [0,1,2];
 
   var lista=[
-  {"nombre": "Google Festival", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","num":1},
-  {"nombre": "Google Fest", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","num":3},
-  {"nombre": "Google Action", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","num":2},
-  {"nombre": "Viña 2017", "imagen": "http://inklinedesign.com/wp-content/uploads/2013/04/logo-10.jpg","num":4},
-  {"nombre": "Festival Imperial", "imagen": "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg","num":6},
-  {"nombre": "Woodstock", "imagen": "http://i.ebayimg.com/images/a/(KGrHqFHJDME-mK53dw+BPs56i5MVQ~~/s-l300.jpg","num":5}
+  {"nombre": "Google Festival", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","id":1},
+  {"nombre": "Google Fest", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","id":3},
+  {"nombre": "Google Action", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","id":2},
+  {"nombre": "Viña 2017", "imagen": "http://inklinedesign.com/wp-content/uploads/2013/04/logo-10.jpg","id":4},
+  {"nombre": "Festival Imperial", "imagen": "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg","id":6},
+  {"nombre": "Woodstock", "imagen": "http://i.ebayimg.com/images/a/(KGrHqFHJDME-mK53dw+BPs56i5MVQ~~/s-l300.jpg","id":5}
 ];
   function myhomeController($scope, $http, $location){
     $scope.admi=true;
     $scope.los3carteles = [];
     $scope.mywelcome = "Welcome to my Concert";
-    $scope.prueba = null;
     $scope.lista_Cartelera=[];
 
 
@@ -46,8 +45,9 @@ angular
     };
 
     $scope.showCartel = function (cartel){
-      $scope.prueba = "Showing Festival "+cartel.nombre;
-      $location.url("/bandas")
+      var newUrl = "/cartelera/"+cartel.id;
+
+      $location.url(newUrl);
     };
 
     getAllCarteleras= function () {
@@ -66,8 +66,10 @@ angular
       },function myerror (response){
         $scope.prueba = "Request fallido "+ response.statusText;
       });
+      $scope.getCarteles("next");
     };
     getAllCarteleras();
+
 
 
 
