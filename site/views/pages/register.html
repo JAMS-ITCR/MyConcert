@@ -9,22 +9,22 @@
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" ng-model="name" class="form-control" placeholder="nombre">
+                            <input type="text" ng-model="user.name" class="form-control" placeholder="nombre">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" ng-model="lastname1" class="form-control" placeholder="Primer Apellido">
+                            <input type="text" ng-model="user.surname1" class="form-control" placeholder="Primer Apellido">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" ng-model="lastname2" class="form-control" placeholder="Segundo apellido">
+                            <input type="text" ng-model="user.surname2" class="form-control" placeholder="Segundo apellido">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" ng-model="userName" class="form-control" placeholder="Usuario">
+                            <input type="text" ng-model="user.userName" class="form-control" placeholder="Usuario">
                         </div>
 
                         <div class="input-group mb-3">
@@ -35,32 +35,22 @@
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="password" ng-model="pass" class="form-control" placeholder="Contraseña">
+                            <input type="password" ng-model="user.pass" class="form-control" placeholder="Contraseña">
                         </div>
 
                         <div class="input-group mb-4">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="password" ng-model="repass" class="form-control" placeholder="Confirma Contraseña">
+                            <input type="password" ng-model="user.repass" class="form-control" placeholder="Confirma Contraseña">
                         </div>
                         <div class=error>
                           {{msj}}
                         </div>
-                        <button type="button" class="btn btn-block btn-success">Create Account</button>
-                    </div>
-                    <div class="card-footer p-4">
-                        <div class="row">
-                            <div class="col-6">
-                                <button class="btn btn-block btn-facebook" type="button">
-                                    <span>facebook</span>
-                                </button>
-                            </div>
-                            <div class="col-6">
-                                <button class="btn btn-block btn-twitter" type="button">
-                                    <span>twitter</span>
-                                </button>
-                            </div>
-                        </div>
+                        <button type="button" ng-click="register(user.userName, user.pass,
+                            user.name, user.surname1, user.surname2, user.mail, user.pass, user.role,
+                            user.birthdate, user.country, user.address, user.college,
+                            user.phone, user.photo, user.description)"
+                            class="btn btn-block btn-success">Crear Cuenta</button>
                     </div>
                 </div>
             </div>
