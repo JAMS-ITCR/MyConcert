@@ -103,7 +103,8 @@ angular
   // Additional Pages
   .state('appSimple.register', {
     url: '/register',
-    templateUrl: 'views/pages/register.html'
+    templateUrl: 'views/pages/register.html',
+    controller : 'registerController'
   })
   .state('appSimple.404', {
     url: '/404',
@@ -126,11 +127,6 @@ angular
     templateUrl: 'views/pages/login.html',
     controller : 'loginController'
   })
-  /*.state('appSimple.register', {
-    url: '/register',
-    templateUrl: 'views/pages/register.html',
-    controller : 'registerController'
-  })*/
   .state('app.festival', {
     url: '/festival',
     templateUrl: 'views/festival.html',
