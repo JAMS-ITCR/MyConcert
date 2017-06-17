@@ -8975,3 +8975,37 @@ hr.transparent {
     border-right-color: #f86c6b; }
   *[dir="rtl"] .callout-success {
     border-right-color: #4dbd74; }
+
+.error {
+  color: red; }
+
+.genre {
+  margin: auto;
+  margin-left: 20px;
+  margin-right: 2px; }
+
+.remove {
+  margin: auto;
+  margin-left: 20px;
+  margin-right: 2px; }
+
+#telacrei {
+  background: url("../img/telacreistewe.jpg") no-repeat no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  border: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+#telacrei div {
+  height: 100vh;
+  align-items: center; }
