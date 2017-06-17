@@ -4,52 +4,48 @@
 
 <div ng-controller= "myhomeController">
 <h1> {{mywelcome}} </h1>
-    <div>
+    <div class="contenedor2">
       <h2>Carteleras</h2>
-        <div class="show_items">
-          <div class="show_items">
-            <button  class ="side_arrow" ng-click="getCarteles('previous')"><img src="img/arrowleft.png" width="40" height="150"></button>
-            <img src={{los3carteles[0].imagen}} alt="logo" height="300" width="300" ng-click="showCartel(los3carteles[0])">
-            <br>
-            <h3 class="primer_nombre">{{los3carteles[0].nombre}}</h3>
+      <div class="contenedor">
+          <div class="boton">
+              <button ng-click="slideCartelera(true)"><img src="/img/arrowleft.png" width="50" height="50"></button>
           </div>
-          <div class="show_items">
-            <img src={{los3carteles[1].imagen}} alt="logo" height="300" width="300" ng-click="showCartel(los3carteles[1])">
-            <br>
-            <h3>{{los3carteles[1].nombre}}</h3>
+        <div class="contenedor">
+          <div ng-repeat="cartel in mostrando_cartelera">
+              <img ng-src=cartel.imagen width="300px" height="300px" ng-click="selectItem(cartel,true)">
+              <h3>{{cartel.Nombre}}</h3>
           </div>
-          <div class="show_items">
-            <img src={{los3carteles[2].imagen}} alt="logo" height="300" width="300" ng-click="showCartel(los3carteles[2])">
-            <button class ="side_arrow" ng-click="getCarteles('next')"><img src="img/arrowright.png" width="40" height="150"></button>
-            <br>
-            <h3>{{los3carteles[2].nombre}}</h3>
-          </div>
+        </div>
+        <div class="boton">
+          <button ng-click="slideCartelera(false)"><img src="/img/arrowright.png" width="50" height="50" ></button>
         </div>
       </div>
-      <br>
-      <button class="plus" ng-show="admi"><img src="img/plus_icon.png" width="30" height="40"></button>
-      <br>
-      <div>
-        <h2>Festival</h2>
-        <button type="button" name="button">previous</button>
-        <div class="show_items">
-          <div class="show_items">
-            <img src="http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png" alt="logo" style="with=100">
-            <br>
-            <button type="button" name="button">Festival 1</button>
-          </div>
-          <div class="show_items">
-            <img src="http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png" alt="logo" style="with=100">
-            <br>
-            <button type="button" name="button">Festival 2</button>
-          </div>
-          <div class="show_items">
-            <img src="http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png" alt="logo" style="with=100">
-            <br>
-            <button type="button" name="button">Festival 3</button>
-          </div>
-        </div>
-        <button type="button" name="button">next</button>
 
+      <div class="plus">
+        <button class="" ng-show="admi"><img src="img/plus_icon.png" width="30" height="40"></button>
       </div>
+    </div>
+
+    <div class="contenedor2">
+      <h2>Festivales</h2>
+      <div class="contenedor">
+          <div class="boton">
+              <button ng-click="slidefestivales(false)"><img src="/img/arrowleft.png" width="50" height="50"></button>
+          </div>
+        <div class="contenedor">
+          <div ng-repeat="festival in mostrando_festivales">
+              <img ng-src=festial.imagen width="300px" height="300px">
+              <h3>{{festival.Nombre}}</h3>
+          </div>
+        </div>
+        <div class="boton">
+          <button ng-click="slidefestivales(true)"><img src="/img/arrowright.png" width="50" height="50" ></button>
+        </div>
+      </div>
+      <div class="plus">
+        <button ng-show="admi"><img src="img/plus_icon.png" width="30" height="40"></button>
+      </div>
+    </div>
+
+
 </div>

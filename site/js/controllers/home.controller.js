@@ -4,72 +4,107 @@ angular
   myhomeController.inject = ['$scope'];
   myhomeController.inject = ['$http'];
   myhomeController.inject = ['$location'];
-  var position = [0,1,2];
 
-  var lista=[
-  {"nombre": "Google Festival", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","id":1},
-  {"nombre": "Google Fest", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","id":3},
-  {"nombre": "Google Action", "imagen":"http://www.staffcreativa.pe/blog/wp-content/uploads/IMAGEN-4.png","id":2},
-  {"nombre": "Viña 2017", "imagen": "http://inklinedesign.com/wp-content/uploads/2013/04/logo-10.jpg","id":4},
-  {"nombre": "Festival Imperial", "imagen": "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg","id":6},
-  {"nombre": "Woodstock", "imagen": "http://i.ebayimg.com/images/a/(KGrHqFHJDME-mK53dw+BPs56i5MVQ~~/s-l300.jpg","id":5}
-];
+  var position_cartelera = [0,1,2];
+  var position_festivales = [0,1,2];
+
+
   function myhomeController($scope, $http, $location){
-    $scope.admi=true;
-    $scope.los3carteles = [];
     $scope.mywelcome = "Welcome to my Concert";
     $scope.lista_Cartelera=[];
+    $scope.lista_Festivales=[];
+    $scope.mostrando_cartelera=[];
+    $scope.mostrando_festivales=[];
+    $scope.admi=true;
 
-
-    $scope.getCarteles = function(orden){
-      //poner la comprobación de admi
-      if(orden=="next"){
-        for(i=0; i<position.length; i++){
-          position[i]=position[i]+1;
-          if(position[i]==$scope.lista_Cartelera.length){
-            position[i]=0;
-          }
-        }
+    $scope.selectItem = function (item,isCartel){
+      console.log(item);
+      if(isCartel){
+        var newUrl = "/cartelera/"+item.IdCartelera;
+        $location.url(newUrl);
       }
-      else if (orden=="previous") {
-        for(i=0; i<position.length; i++){
-          position[i]=position[i]-1;
-          if(position[i]==-1){
-            position[i]=$scope.lista_Cartelera.length-1 ;
-          }
-        }
-      }
-      $scope.los3carteles[0] = $scope.lista_Cartelera[position[0]];
-      $scope.los3carteles[1] = $scope.lista_Cartelera[position[1]];
-      $scope.los3carteles[2] = $scope.lista_Cartelera[position[2]];
     };
 
-    $scope.showCartel = function (cartel){
-      var newUrl = "/cartelera/"+cartel.id;
+    getAllInfo= function () {
+      var CarteleraURL = "http://myconcertv2.cloudapp.net/PEDS/BillboardServices.svc/billboards";
+      var FestivalURL = "http://myconcertv2.cloudapp.net/PEDS/BillboardServices.svc/billboards"
 
-      $location.url(newUrl);
-    };
+        $http({
+        method : "GET",
+        url : CarteleraURL
+      }).then(function mysuccess(response){
+        var ListaRaw = angular.fromJson(response.data.getBillBoardResult);
+        if($scope.admi){
+          CarteleraURL="";
+        }
+        else {
+          CarteleraURL="";
+        }
+          $scope.lista_Cartelera=ListaRaw;
 
-    getAllCarteleras= function () {
-      var CarteleraURL = "";
+          for (var i = 0; i < 3; i++) {
+            $scope.mostrando_cartelera[i]=$scope.lista_Cartelera[i];
+          }
+      },function myerror (response){
+        $scope.prueba = "Request fallido "+ response.statusText;
+      });
+
+      $http({
+      method : "GET",
+      url : FestivalURL
+      }).then(function mysuccess(response){
+      var ListaRaw = angular.fromJson(response.data.getBillBoardResult);
       if($scope.admi){
         CarteleraURL="";
       }
       else {
         CarteleraURL="";
       }
-        $http({
-        method : "GET",
-        url : CarteleraURL
-      }).then(function mysuccess(response){
-          $scope.lista_Cartelera=lista;
+      $scope.lista_Festivales=ListaRaw;
+      for (var i = 0; i < 3; i++) {
+          $scope.mostrando_festivales[i]=$scope.lista_Festivales[i];
+      }
       },function myerror (response){
         $scope.prueba = "Request fallido "+ response.statusText;
       });
-      $scope.getCarteles("next");
     };
-    getAllCarteleras();
 
+    $scope.slideCartelera = function(left){
+      if(left){
+        for (var i = 0;i<3;i++){
+         position_cartelera[i]=position_cartelera[i]-1;
+         if(position_cartelera[i]<0){position_cartelera[i]=$scope.lista_Cartelera.length-1;}
+       }
+     }
+     else {
+      for (var i = 0;i<3;i++){
+        position_cartelera[i]=position_cartelera[i]+1;
+        if(position_cartelera[i]>$scope.lista_Cartelera.length-1){position_cartelera[i]=0;}
+        }
+      }
+      for (var i = 0; i <3; i++) {
+        $scope.mostrando_cartelera[i]=$scope.lista_Cartelera[position_cartelera[i]];
+      }
+    }
+    $scope.slidefestivales = function(left){
+      if(left){
+        for (var i = 0;i<3;i++){
+         position_festivales[i]=position_festivales[i]-1;
+         if(position_festivales[i]<0){position_festivales[i]=$scope.lista_Festivales.length-1;}
+       }
+     }
+     else {
+      for (var i = 0;i<3;i++){
+        position_festivales[i]=position_festivales[i]+1;
+        if(position_festivales[i]>$scope.lista_Festivales.length-1){position_festivales[i]=0;}
+        }
+      }
+      for (var i = 0; i <3; i++) {
+        $scope.mostrando_festivales[i]=$scope.lista_Festivales[position_festivales[i]];
+      }
+    }
+
+    getAllInfo();
 
 
 

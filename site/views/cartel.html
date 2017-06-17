@@ -3,9 +3,36 @@
 </head>
 
 <div ng-controller="carteleraController">
-    <h1 class="cartel"> {{Nombre}} </h1>
-    <div class="show_items">
-        <img class="cartel" src="imagen">
-        <p class="show_items">Info de la cartelera</p>
+    <h1 class="cartel" align="center"> {{Nombre}} </h1>
+    <div align="center">
+          <img align="center" width="300" height= "300" src= "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg">
+          <h5 align="center">
+                 Lugar del evento: {{lugar}}, {{pais}} <br>
+                 Cierre de votaciones: {{fecha_cierre}}<br>
+                 Fecha de inicio: {{fecha_inicio}}<br>
+                 Fecha de finalización: {{fecha_final}}
+               </h5>
+          </div>
+      </div>
     </div>
+    <div class="categoria_style" ng-click="changeIcon()">
+      <button class="accordion">
+        <h2 class="nombre_cartel">Categoría</h2>
+        <img width="30" height= "30" ng-src={{iconUpDown}}>
+        <h5 class="disponible" align="right" ng-show="!admi">dinero disponible: $x</h5>
+      </button>
+      <div class="panel">
+        Aqui va todo
+      </div>
+    </div>
+
+      <button class="accordion">Section 2</button>
+      <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+
+      <button class="accordion">Section 3</button>
+      <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
 </div>
