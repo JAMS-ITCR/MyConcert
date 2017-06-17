@@ -17,7 +17,6 @@ angular
   'oc.lazyLoad',
   'ncy-angular-breadcrumb',
   'angular-loading-bar',
-  'slickCarousel'
   'ngMaterial'
 ])
 .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {

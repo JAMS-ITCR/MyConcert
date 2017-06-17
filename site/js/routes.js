@@ -146,6 +146,7 @@ angular
       label: 'createcartelera'
     },
     controller : 'newCartelController'
+  })
   .state('appSimple.login', {
     url: '/login',
     templateUrl: 'views/pages/login.html',
