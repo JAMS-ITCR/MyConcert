@@ -41,7 +41,6 @@ angular
           CarteleraURL="";
         }
           $scope.lista_Cartelera=ListaRaw;
-
           for (var i = 0; i < 3; i++) {
             $scope.mostrando_cartelera[i]=$scope.lista_Cartelera[i];
           }

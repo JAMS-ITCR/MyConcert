@@ -6,70 +6,31 @@ carteleraController.inject = ['$http'];
 carteleraController.inject = ['$stateParams'];
 
 // Ejemplo para realizar pruebas mientras se sube el servicio
-var info_cartelw3=
-{		"id": 6,
-		"Nombre": "Festival Imperial",
-		"pais": "Costa Rica",
-		"lugar": "Parque Viva",
-		"Cierra": "17-06-2017",
-		"fecha_inicio": "17-07-2017",
-		"fecha_final": "20-07-2017",
-		"estado": true,
-    "imagen": "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg"
-};
-
-var arreglo_categorias = {
-	"categorias": [{
-		"idCategoria": 1,
-		"nombre": "Nivel 1",
-		"bandasXvotar": [{
-			"idBanda": 1,
-			"nombreBanda": "SanGil",
-			"acumulado": 0
-		}, {
-			"idBanda": 2,
-			"nombreBanda": "Vapurrum",
-			"acumulado": 0
-		}]
-	}, {
-		"idCategoria": 2,
-		"nombre": "Medio malas",
-		"bandasXvotar": [{
-			"idBanda": 3,
-			"nombreBanda": "Tulongo",
-			"acumulado": 0
-		}]
-	}]
-};
 
 function carteleraController($scope, $stateParams, $http){
   $scope.admi=false;
   $scope.idCartel=$stateParams.cartelID;
-	$scope.iconUpDown="/img/arrowdown.png";;
-	var UpDown=false;
-  $scope.changeIcon= function(){
-
-		if (UpDown) {
-			$scope.iconUpDown="/img/arrowdown.png";
-			UpDown=false;
+	$scope.Cartel={};
+	$scope.UpDown=true;
+	$scope.changeIcon= function(){
+		if ($scope.UpDown) {
+			$scope.UpDown=false;
 		}
 		else {
-			$scope.iconUpDown="/img/arrowup.png";
-			UpDown=true;
+			$scope.UpDown=true;
 		}
-		return src;
 	}
 
   //function para hacer el request de las carteleras que se van a ocupar
 	getInfoCartelera = function  (){
 		// Obtener el id de la cartelera $scope.idCartel
-    var urlCartel = "";
+    var urlCarteles = "http://myconcertv2.cloudapp.net/PEDS/BillboardServices.svc/billboards";
       $http({
         method: "GET",
-        url: ""
+        url: urlCarteles
       }).then(function mysuccess(response){
-					$scope.info_cartel=info_cartelw3;
-          set_values(true);
+					var ListaRaw = angular.fromJson(response.data.getBillBoardResult);
+					findCartelera(ListaRaw);
       },function myerror (response){
         $scope.info = "Request fallido "+ response.statusText;
       });
@@ -81,27 +42,22 @@ function carteleraController($scope, $stateParams, $http){
         method: "GET",
         url: ""
       }).then(function mysuccess(response){
-          set_values(false);
       },function myerror (response){
         $scope.info = "Request fallido "+ response.statusText;
       });
 		}
-    		//Esta function se llama dentro de get info si el Requestes exitoso, la misma setea todos los valores
-    set_values= function (encabezado){
-			if(encabezado){
-				$scope.Nombre=$scope.info_cartel.Nombre;
-				$scope.lugar=$scope.info_cartel.lugar;
-				$scope.Id=$scope.info_cartel.id;
-				$scope.fecha_inicio=$scope.info_cartel.fecha_inicio;
-				$scope.fecha_final=$scope.info_cartel.fecha_final;
-				$scope.fecha_cierre=$scope.info_cartel.Cierra;
-				$scope.pais=$scope.info_cartel.pais;
-				$scope.imagen=$scope.info_cartel.imagen;
-			}
-			else {
 
+		findCartelera = function(ListaRaw){
+			var id = $scope.idCartel;
+			console.log(id);
+			for (var i = 0; i < ListaRaw.length; i++) {
+				if(ListaRaw[i].IdCartelera==id){
+					console.log(ListaRaw[i]);
+					$scope.Cartel=ListaRaw[i];
+					break;
+				}
 			}
-    };
+		}
 		//Se llama a la function
     getInfoCartelera();
 		getInfoCategorias();
