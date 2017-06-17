@@ -4,46 +4,108 @@
             <div class="col-md-6">
                 <div class="card mx-4">
                     <div class="card-block p-4">
-                        <h1>Register</h1>
-                        <p class="text-muted">Create your account</p>
+                        <h1>Registro</h1>
+                        <p class="text-muted">Crear una cuenta</p>
+                        <form>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" class="form-control" placeholder="Username">
+                            <input type="text" ng-model="user.nameUser" class="form-control" ng-required='!user.nameUser' placeholder="Nombre">
                         </div>
-
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon"><i class="icon-user"></i>
+                            </span>
+                            <input type="text" ng-model="user.surname1User" class="form-control" ng-required='!user.surname1User' placeholder="Primer Apellido">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon"><i class="icon-user"></i>
+                            </span>
+                            <input type="text" ng-model="user.surname2User" class="form-control" ng-required='!user.surname2User' placeholder="Segundo apellido">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-addon"><i class="icon-user"></i>
+                            </span>
+                            <input type="text" ng-model="user.nicknameUser" class="form-control" ng-required='!user.nicknameUser' placeholder="Usuario">
+                        </div>
                         <div class="input-group mb-3">
                             <span class="input-group-addon">@</span>
-                            <input type="text" class="form-control" placeholder="Email">
+                            <input type="text" ng-model="user.mailUser" class="form-control" ng-required='!user.mailUser' placeholder="direccion@dominio.com">
                         </div>
-
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" ng-model="user.passUser" class="form-control" ng-required='!user.passUser' placeholder="Contraseña">
                         </div>
-
                         <div class="input-group mb-4">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="password" class="form-control" placeholder="Repeat password">
+                            <input type="password" ng-model="repass" class="form-control" ng-required='!user.repass' placeholder="Confirma Contraseña">
+                        </div>
+                        <div>
+                          <label>
+                              <input type="radio" ng-model="user.roleUser" value=2  ng-required='!user.roleUser'>
+                              Fanático
+                          </label><br>
+                          <label>
+                              <input type="radio" ng-model="user.roleUser" value=1 ng-required='!user.roleUser'>
+                              Administrador
+                          </label>
+                        </div>
+                        <div  ng-show="user.roleUser == 2" class="input-group mb-3">
+                          <input type="file" name="myImage" image-with-preview ng-model="user.photoUser" accept="image/jpeg,image/png">
+                              <span class="error" ng-show="myForm.myImage.$error.image">
+                                  Sólo se acepta fotos con formato JPG o PNG.
+                              </span>
+                              <img ng-show="user.photoUser.src" ng-src="{{user.photoUser.src}}"/>
                         </div>
 
-                        <button type="button" class="btn btn-block btn-success">Create Account</button>
-                    </div>
-                    <div class="card-footer p-4">
-                        <div class="row">
-                            <div class="col-6">
-                                <button class="btn btn-block btn-facebook" type="button">
-                                    <span>facebook</span>
-                                </button>
-                            </div>
-                            <div class="col-6">
-                                <button class="btn btn-block btn-twitter" type="button">
-                                    <span>twitter</span>
-                                </button>
-                            </div>
+                        <div  ng-show="user.roleUser == 2" class="input-group mb-3">
+                            <select ng-model="user.countryUser">
+                              <option  ng-required="user.roleUser == 2" ng-repeat="country in countries" value="{{country.IdPais}}">{{country.NombrePais}}</option>
+                            </select>
                         </div>
+
+                        <div  ng-show="user.roleUser == 2" class="input-group mb-4">
+                            <span class="input-group-addon"><i class="icon-lock"></i>
+                            </span>
+                            <input type="text" ng-model="user.addressUser" class="form-control" placeholder="Dirección">
+                        </div>
+                        <div  ng-show="user.roleUser == 2" class="input-group mb-3">
+                            <span class="input-group-addon"><i class="icon-user"></i>
+                            </span>
+                            <input type="text" ng-model="user.collegeUser" class="form-control" placeholder="Universidad">
+                        </div>
+
+                        <div  ng-show="user.roleUser == 2" class="input-group mb-3">
+                            <span class="input-group-addon">@</span>
+                            <input type="text" ng-model="user.phoneUser" class="form-control" ng-required="user.roleUser == 2" placeholder="Telefono">
+                        </div>
+
+                        <div  ng-show="user.roleUser == 2" class="input-group mb-4">
+                            <span class="input-group-addon"><i class="icon-lock"></i>
+                            </span>
+                            <input type="text" ng-model="user.descriptionUser" class="form-control" ng-required="user.roleUser == 2" placeholder="Descripción">
+                        </div>
+                        <div ng-show="user.roleUser==2">
+                          <md-input-container>
+                            <label>Cumpleaños</label>
+                            <md-datepicker  ng-required="user.roleUser==2" ng-model="user.birthdateUser"></md-datepicker>
+                          </md-input-container>
+                        </div>
+                        <div ng-show="user.roleUser==2">
+                          <h4>Géneros</h4>
+                          <ul>
+                              <li ng-repeat="genre in genres">{{genre.Nombre}}<button ng-click="removeGenre(genre)" class="remove">x</button></li>
+                          </ul>
+                          <button type="button" ng-click="addGenre($event) "class="mb-4"
+                              ng-show="user.roleUser">Agregar</button>
+                        </div>
+                        <div class=error>
+                          {{msj}}
+                        </div>
+                        <button type="button" ng-click="register(user)"
+                            class="btn btn-block btn-success"   ng-show="user.roleUser">Crear Cuenta</button>
+                          </form>
                     </div>
                 </div>
             </div>
