@@ -1,80 +1,130 @@
 angular
 .module('app')
 .controller('registerpController', registerpController);
-registerpController.$inject = ['$scope','$http','$window'];
- function registerpController ($scope,$http,$window) {
-/*   $scope.user.userName = "";
-   $scope.user.name = "";
-   $scope.user.surname1 = "";
-   $scope.user.surname2 = "";
-   $scope.user.mail = "";
-   $scope.user.pass= "";
-   $scope.user.repass= "";
-   $scope.user.rol = "";
-   $scope.user.birthdatte = "";
-   $scope.user.country = "";
-   $scope.user.address = "";
-   $scope.user.college = "";
-   $scope.user.phone = "";
-   $scope.user.description = "";
+registerpController.$inject = ['$scope','$http','$window', '$mdDialog'];
+ function registerpController ($scope,$http,$window,$mdDialog) {
+   $scope.user = {
+       nameUser:'',
+       surname1User:'',
+       surname2User:'',
+       mailUser:'',
+       nicknameUser:'',
+       passUser:'',
+       roleUser:0,
+       birthdateUser:'',
+       countryUser:0,
+       addressUser:'',
+       collegeUser:'',
+       phoneUser:'',
+       photoUser:'',
+       descriptionUser:''
+     };
+   $scope.repass = '';
    $scope.validPass = false;
    $scope.msj = "";
-   $scope.register = function(userName, passWord, nameUser, surname1User, surname2User,
-   mailUser, passUser, roleUser, birthdateUser, countryUser, addressUser, collegeUser,
-   phoneUser, photoUser, descriptionUser) {
-        if (passUser!=$scope.repass){
-
+   if(sessionStorage.user && sessionStorage.priv){
+       $window.location.href = '/#!/home';
+   }
+   $scope.register = function(user) {
+     console.log(user);
+     $http({
+        method: 'POST',
+        url: 'http://myconcertv2.cloudapp.net/UserService.svc/user',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8'
+        },
+       params : user
+     }).then(
+      function (data){
+        console.log("CREATE USER", data.data);
+        switch (angular.fromJson(data.data.createUserResult)) {
+          case 100:
+            sessionStorage.user=user.nicknameUser;
+            sessionStorage.priv=user.roleUser==1 ? "Admin" : "Fan";
+            $scope.msj = "";
+            $window.location.href = '/#!/home';
+            break;
+          default:
+            $scope.msj = data.data.createUserResult.info;
         }
-        var Url = "http://myconcertv2.cloudapp.net/UserService.svc/logout/"+userName+"?"+
-        "nameUser="+nameUser+"&"+
-        "surname1User="+surname1User+"&"+
-        "surname2User="+surname2User+"&"+
-        "mailUser="+mailUser+"&"+
-        "nicknameUser="+nicknameUser+"&"+
-        "passUser="+passUser +"&"+
-        "roleUser="+roleUser+"&"+
-        "birthdateUser="+birthdateUser+"&"+
-        "countryUser="+countryUser+"&"+
-        "addressUser="+addressUser+"&"+
-        "collegeUser="+collegeUser+"&"+
-        "phoneUser="+phoneUser+"&"+
-        "photoUser="+photoUser+"&"+
-        +"descriptionUser="+descriptionUser;
-        $http({
-          method: 'GET',
-          url: Url
-        }).then (
-          function (data) {
-            sessionStorage.user = JSON.stringify($scope.userName);
-            switch (data.data.loginResult) {
-              case 103:
-                sessionStorage.priv = JSON.stringify("admin");
-                $window.location.href = '/#!/home';
-                break;
-              case 104:
-                sessionStorage.priv = JSON.stringify("fan");
-                $window.location.href = '/#!/home';
-                break;
-              case 105:
-                sessionStorage.user = JSON.stringify("");
-                $scope.msj = "El usuario ya está activo, cierre sesión en el otro dispositivo.";
-                break;
-              case 106:
-                sessionStorage.user = JSON.stringify("");
-                $scope.msj = "El usuario y contraseña no coinciden.";
-                break;
-              default:
-
-            }
-          },
-          function (error){
-            console.error(data);
-          }
-
-        );
+      },
+      function (error){
+        console.erro("CREATE USER",error);
+        $scope.msj = data.data.createUserResult.info;
+      }
+    );
         $scope.count += 1;
     };
-    if(sessionStorage.length < 2|| !JSON.parse(sessionStorage.user) || !JSON.parse(sessionStorage.priv)){
-      $window.location.href = '/#!/login';
-    }*/
+    $scope.addGenre = function(ev) {
+      $mdDialog.show({
+        controller: dialogGenreController,
+        templateUrl: '../../views/pages/dialogGenres.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function(selection) {
+        $scope.genres =  selection;
+      },
+      function (error){
+        console.error(error);
+      });
+    };
+    $scope.removeGenre = function(data) {
+       var index=$scope.genres.indexOf(data);
+       $scope.genres.splice(index, 1);
+    };
+    getcountries = function() {
+      var Url = "http://myconcertv2.cloudapp.net/CountriesService.svc/countries";
+      $http({
+        method: 'GET',
+        url: Url
+      }).then (
+        function (data) {
+          $scope.countries = angular.fromJson(data.data.getCountriesResult);
+        },
+        function (error){
+          console.error(data);
+        }
+      );
+    };
+    getcountries();
+};
+function dialogGenreController($scope, $http, $mdDialog) {
+     $scope.selection = [];
+     var Url = "http://myconcertv2.cloudapp.net/PEDS/BandsService.svc/genders";
+     $http({
+       method: 'GET',
+       url: Url
+     }).then (
+       function (data) {
+         $scope.allGenres = angular.fromJson(data.data.getGendersResult);
+       },
+       function (error){
+         console.error(data);
+       }
+     );
+  $scope.hide = function() {
+    $mdDialog.hide();
+  };
+
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+
+  $scope.accept = function(selection) {
+    $mdDialog.hide($scope.selection);
+    return $scope.selection;
+  };
+  $scope.toggleSelection =function(data){
+    //console.log('my seletion',data);
+    var index=$scope.selection.indexOf(data);
+    if(index==-1){
+      $scope.selection.push(data);
+    }
+    else{
+      $scope.selection.splice(index, 1);
+    }
+  }
 };

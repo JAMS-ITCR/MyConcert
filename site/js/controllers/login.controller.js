@@ -48,7 +48,7 @@ loginController.$inject = ['$scope','$http','$window'];
             }
           },
           function (error){
-            console.error(data);
+            console.error(error);
           }
         );
         $scope.tries += 1;

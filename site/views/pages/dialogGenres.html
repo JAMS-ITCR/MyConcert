@@ -1,0 +1,36 @@
+<md-dialog aria-label="Agregue sus generos favoritos">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h3>Agregue sus generos favoritos</h3>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon aria-label="Close dialog">X</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <label ng-repeat="genre in allGenres">
+          <input
+            type="checkbox"
+            name="selectedGenres[]"
+            class="genre"
+            value="{{genre}}"
+            ng-checked="selection.indexOf(genre) > -1"
+            ng-click="toggleSelection(genre)"
+
+          > {{genre.Nombre}}
+      </label>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">
+       Cancelar
+      </md-button>
+      <md-button ng-click="accept($scope.selection)">
+        Aceptar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
