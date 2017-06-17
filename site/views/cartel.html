@@ -1,29 +1,37 @@
 
 <div ng-controller="carteleraController">
-    <h1 class="" align="center"> {{Cartel.Nombre}} </h1>
-    <div align="center">
-          <img align="center" width="300" height= "300" src= "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg">
-          <h4 align="center">
-                 Lugar del evento: {{Cartel.Lugar}}, {{Cartel.NombrePais}} <br>
-                 Cierre de votaciones: {{Cartel.CierreVotacion}}<br>
-                 Fecha de inicio: {{Cartel.FechaInicio}}<br>
-                 Fecha de finalización: {{Cartel.FechaFinal}}
-               </h4>
-          </div>
-      </div>
+  <div class="card card">
+    <div class="card-header">
+        <h1 class="" align="center"> {{Cartel.Nombre}} </h1>
     </div>
+    <div class="card-block">
+
+      <div align="center">
+        <img align="center" width="300" height= "300" src= "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg">
+        <h4 align="center">
+               Lugar del evento: {{Cartel.Lugar}}, {{Cartel.NombrePais}} <br>
+               Cierre de votaciones: {{Cartel.CierreVotacion}}<br>
+               Fecha de inicio: {{Cartel.FechaInicio}}<br>
+               Fecha de finalización: {{Cartel.FechaFinal}}
+             </h4>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
 
     <div class="categoria_style">
       <div class="">
         <button class="accordion" ng-click="changeIcon()">
           <div class="contenedor">
             <div class="contenedor">
-              <h2>Categoría</h2>
-              <div class="" ng-show="UpDown">
-                    <i class="icon-arrow-down icons h4 d-block m-t-2" ></i>
+              <label>Categoría</label>
+              <div class="UpDownstyle" ng-show="UpDown">
+                    <i class="fa fa-angle-double-down fa-lg m-t-2" ></i>
                 </div>
-              <div class="" ng-show="!UpDown">
-                    <i class="icon-arrow-up icons h4 d-block m-t-2" ></i>
+              <div class="UpDownstyle" ng-show="!UpDown">
+                    <i class="fa fa-angle-double-up fa-lg m-t-2" width=50 height=50></i>
                 </div>
 
             </div>
