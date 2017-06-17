@@ -18,7 +18,6 @@ angular
     $scope.admi=true;
 
     $scope.selectItem = function (item,isCartel){
-      console.log(item);
       if(isCartel){
         var newUrl = "/cartelera/"+item.IdCartelera;
         $location.url(newUrl);
@@ -102,7 +101,16 @@ angular
         $scope.mostrando_festivales[i]=$scope.lista_Festivales[position_festivales[i]];
       }
     }
-
+    $scope.CreateNew = function(isCartel){
+      var newUrl="";
+      if(isCartel){
+        newUrl="/newcartelera/"
+      }
+      else {
+        newUrl="/newfestival/"
+      }
+      $location.url(newUrl);
+    }
     getAllInfo();
 
 

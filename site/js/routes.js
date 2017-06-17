@@ -141,4 +141,12 @@ angular
     },
     controller : 'carteleraController'
   })
+  .state('app.createcartelera', {
+    url: '/createcartelera',
+    templateUrl: 'views/newcartel.html',
+    ncyBreadcrumb: {
+      label: 'createcartelera'
+    },
+    controller : 'newCartelController'
+  })
 }]);

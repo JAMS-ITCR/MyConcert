@@ -12,7 +12,7 @@
           </div>
         <div class="contenedor">
           <div ng-repeat="cartel in mostrando_cartelera">
-              <img ng-src=cartel.imagen width="300px" height="300px" ng-click="selectItem(cartel,true)">
+              <img ng-src="http://lorempixel.com/400/200/abstract/" width="300px" height="300px" ng-click="selectItem(cartel,true)">
               <h3>{{cartel.Nombre}}</h3>
           </div>
         </div>
@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="plus">
-        <button class="" ng-show="admi"><img src="img/plus_icon.png" width="30" height="40"></button>
+        <button class="" ng-show="admi" ng-click="CreateNew(true)"><img src="img/plus_icon.png" width="30" height="40"></button>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
           </div>
         <div class="contenedor">
           <div ng-repeat="festival in mostrando_festivales">
-              <img ng-src=festial.imagen width="300px" height="300px">
+              <img ng-src="http://lorempixel.com/400/200/abstract/" width="300px" height="300px">
               <h3>{{festival.Nombre}}</h3>
           </div>
         </div>
