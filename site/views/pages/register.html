@@ -6,41 +6,48 @@
                     <div class="card-block p-4">
                         <h1>Registro</h1>
                         <p class="text-muted">Crear una cuenta</p>
-                        <form>
+                        <ng-form name="RegisterForm">
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" ng-model="user.nameUser" class="form-control" ng-required='!user.nameUser' placeholder="Nombre">
+                            <input type="text" id="userNameInput" ng-model="user.nameUser" class="form-control" ng-required='!user.nameUser' placeholder="Nombre*">
                         </div>
+                        <span ng-show="user.roleUser && !user.nameUser" class="error">Se requiere ingresar un nombre.</span>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" ng-model="user.surname1User" class="form-control" ng-required='!user.surname1User' placeholder="Primer Apellido">
+                            <input type="text" ng-model="user.surname1User" class="form-control" ng-required='!user.surname1User' placeholder="Primer Apellido*">
                         </div>
+                        <span ng-show="user.roleUser && !user.surname1User" class="error">Se requiere ingresar un Apellido.</span>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" ng-model="user.surname2User" class="form-control" ng-required='!user.surname2User' placeholder="Segundo apellido">
+                            <input type="text" ng-model="user.surname2User" class="form-control" ng-required='!user.surname2User' placeholder="Segundo Apellido*">
                         </div>
+                        <span ng-show="user.roleUser && !user.surname2User" class="error">Se requiere ingresar un Apellido.</span>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-user"></i>
                             </span>
-                            <input type="text" ng-model="user.nicknameUser" class="form-control" ng-required='!user.nicknameUser' placeholder="Usuario">
+                            <input type="text" ng-model="user.nicknameUser" class="form-control" ng-required='!user.nicknameUser' placeholder="Usuario*">
                         </div>
+                        <span ng-show="user.roleUser && !user.nicknameUser" class="error">Se requiere ingresar un nombre de usuario.</span>
                         <div class="input-group mb-3">
                             <span class="input-group-addon">@</span>
-                            <input type="text" ng-model="user.mailUser" class="form-control" ng-required='!user.mailUser' placeholder="direccion@dominio.com">
+                            <input type="text" ng-model="user.mailUser" class="form-control" ng-required='!user.mailUser' placeholder="direccion@dominio.com*">
                         </div>
+                        <span ng-show="user.roleUser && !user.mailUser" class="error">Se requiere ingresar un Correo.</span>
                         <div class="input-group mb-3">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="password" ng-model="user.passUser" class="form-control" ng-required='!user.passUser' placeholder="Contraseña">
+                            <input type="password" ng-model="user.passUser" class="form-control" ng-required='!user.passUser' placeholder="Contraseña*">
                         </div>
+                        <span ng-show="user.roleUser && !user.passUser" class="error">Se requiere ingresar una contraseña.</span>
                         <div class="input-group mb-4">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="password" ng-model="repass" class="form-control" ng-required='!user.repass' placeholder="Confirma Contraseña">
+                            <input type="password" ng-model="repass" class="form-control" ng-required='!user.repass' placeholder="Confirma Contraseña*">
                         </div>
+                        <span ng-show="repass && repass!=user.passUser" class="error">Las contraseñas no coinciden.</span>
                         <div>
                           <label>
                               <input type="radio" ng-model="user.roleUser" value=2  ng-required='!user.roleUser'>
@@ -51,19 +58,20 @@
                               Administrador
                           </label>
                         </div>
-                        <div  ng-show="user.roleUser == 2" class="input-group mb-3">
+                        <div  ng-show="user.roleUser == 2" class="input-group mb-3"><span>Foto: </span>
                           <input type="file" name="myImage" image-with-preview ng-model="user.photoUser" accept="image/jpeg,image/png">
-                              <span class="error" ng-show="myForm.myImage.$error.image">
+                              <span class="error" ng-show="RegisterForm.myImage.$error.image">
                                   Sólo se acepta fotos con formato JPG o PNG.
                               </span>
                               <img ng-show="user.photoUser.src" ng-src="{{user.photoUser.src}}"/>
                         </div>
 
-                        <div  ng-show="user.roleUser == 2" class="input-group mb-3">
-                            <select ng-model="user.countryUser">
-                              <option  ng-required="user.roleUser == 2" ng-repeat="country in countries" value="{{country.IdPais}}">{{country.NombrePais}}</option>
+                        <div  ng-show="user.roleUser == 2" class="input-group mb-3"><span>País:*</span>
+                            <select ng-required="user.roleUser==2" ng-model="user.countryUser">
+                              <option   ng-repeat="country in countries" value="{{country.IdPais}}">{{country.NombrePais}}</option>
                             </select>
                         </div>
+                        <span ng-show="user.roleUser==2 && !user.countryUser" class="error">Se requiere seleccionar un país.</span>
 
                         <div  ng-show="user.roleUser == 2" class="input-group mb-4">
                             <span class="input-group-addon"><i class="icon-lock"></i>
@@ -78,20 +86,23 @@
 
                         <div  ng-show="user.roleUser == 2" class="input-group mb-3">
                             <span class="input-group-addon">@</span>
-                            <input type="text" ng-model="user.phoneUser" class="form-control" ng-required="user.roleUser == 2" placeholder="Telefono">
+                            <input type="text" ng-model="user.phoneUser" class="form-control" ng-required="user.roleUser==2" placeholder="Telefono*">
                         </div>
+                        <span ng-show="user.roleUser==2 && !user.phoneUser" class="error">Se requiere ingresar un número telefónico.</span>
 
                         <div  ng-show="user.roleUser == 2" class="input-group mb-4">
                             <span class="input-group-addon"><i class="icon-lock"></i>
                             </span>
-                            <input type="text" ng-model="user.descriptionUser" class="form-control" ng-required="user.roleUser == 2" placeholder="Descripción">
+                            <input type="text" ng-model="user.descriptionUser" class="form-control" ng-required="user.roleUser==2" placeholder="Descripción*">
                         </div>
+                        <span ng-show="user.roleUser==2 && !user.descriptionUser" class="error">Se requiere ingresar una descripción corta.</span>
                         <div ng-show="user.roleUser==2">
                           <md-input-container>
                             <label>Cumpleaños</label>
                             <md-datepicker  ng-required="user.roleUser==2" ng-model="user.birthdateUser"></md-datepicker>
                           </md-input-container>
                         </div>
+                        <span ng-show="user.roleUser==2 && !user.birthdateUser" class="error">Se requiere ingresar una fecha de cumpleaños.</span>
                         <div ng-show="user.roleUser==2">
                           <h4>Géneros</h4>
                           <ul>
@@ -100,11 +111,12 @@
                           <button type="button" ng-click="addGenre($event) "class="mb-4"
                               ng-show="user.roleUser">Agregar</button>
                         </div>
+                        <span ng-show="user.roleUser==2 && genres.length < 5 " class="error">Debe seleccionar al menos 5 géneros.</span>
                         <div class=error>
                           {{msj}}
                         </div>
                         <button type="button" ng-click="register(user)"
-                            class="btn btn-block btn-success"   ng-show="user.roleUser">Crear Cuenta</button>
+                            class="btn btn-block btn-success" ng-disabled="!isValidData(user)"  ng-show="user.roleUser">Crear Cuenta</button>
                           </form>
                     </div>
                 </div>
