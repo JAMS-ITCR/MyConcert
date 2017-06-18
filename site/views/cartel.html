@@ -29,15 +29,15 @@
     </div>
 
     <ang-accordion>
-    <collapsible-item item-title="Some Heading">
-        <div>This is regular html code</div>
+    <collapsible-item ng-repeat="categoria in Cartel.Categories" item-title="{{categoria.CategoriaNombre}}">
+      <div class="">
+        <div class="" ng-repeat="banda in categoria.Bandas">
+          hola
+        </div>
+      </div>
+
     </collapsible-item>
-    <collapsible-item item-title="Some Heading">
-        <div>This is regular html code</div>
-    </collapsible-item>
-    <collapsible-item item-title="Some Heading">
-        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-    </collapsible-item>
+
 
 </ang-accordion>
     <div class="categoria_style" ng-repeat="categoria in Cartel.Categories">
