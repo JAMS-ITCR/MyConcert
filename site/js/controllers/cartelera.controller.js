@@ -74,7 +74,8 @@ function carteleraController($scope, $stateParams, $http){
               existeCat=false;
               var newBanda = {
                 BandaNombre:ListaRaw[i].BandaNombre,
-                IdBanda:ListaRaw[i].IdBanda
+                IdBanda:ListaRaw[i].IdBanda,
+                Acumulado: ListaRaw[i].Acumulado
               }
               $scope.Cartel.Categories[j].Bandas.push(newBanda);
               break;
@@ -86,7 +87,9 @@ function carteleraController($scope, $stateParams, $http){
               dineroRestante:100,
               Bandas:[{
                   BandaNombre:ListaRaw[i].BandaNombre,
-                  IdBanda:ListaRaw[i].IdBanda
+                  IdBanda:ListaRaw[i].IdBanda,
+                  Acumulado: ListaRaw[i].Acumulado
+
                 }]
               };
 

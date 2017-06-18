@@ -1,89 +1,55 @@
 
 <div ng-controller="carteleraController">
-
-    <div class="contenedor">
-      <div class=" card card-inverse card-primary ">
-        <div class="card-header">
-          <h1 class="" align="center"> {{Cartel.Nombre}} </h1>
+  <div class="contenedor">
+    <div class=" card card-inverse card-primary ">
+      <div class="card-header">
+        <h1 class="" align="center"> {{Cartel.Nombre}}  </h1>
+      </div>
+      <div class="card-block  card-inverse card-primary header_fes_car">
+        <div class="card" style="margin:1%;">
+          <img width="300" height= "250" src= "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg">
         </div>
-          <div class="card-block  card-inverse card-primary header_fes_car">
-            <div class="card" style="margin:1%;">
-              <img width="300" height= "250" src= "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg">
-            </div>
 
-            <div class="card card-inverse card-primary" style="height:250px; margin:1%;" >
-              <div class="card-header">
-                <h5>Información General</h5>
-              </div>
-              <div class="card-block" >
-                <p><span  style="font-weight:bold"> Lugar del evento:</span> {{Cartel.Lugar}}, {{Cartel.NombrePais}}</p>
-                <p><span style="font-weight:bold">Cierre de votaciones: </span>{{Cartel.CierreVotacion}}</p>
-                <p><span style="font-weight:bold  ">Fecha de inicio: </span>{{Cartel.FechaInicio}}</p>
-                <p><span style="font-weight:bold">Fecha de finalización:</span> {{Cartel.FechaFinal}}</p>
-              </div>
-            </div>
+        <div class="card card-inverse card-primary" style="height:250px; margin:1%;" >
+          <div class="card-header">
+            <h5>Información General</h5>
           </div>
-
-
+          <div class="card-block" >
+            <p><span  style="font-weight:bold"> Lugar del evento:</span> {{Cartel.Lugar}}, {{Cartel.NombrePais}}</p>
+            <p><span style="font-weight:bold">Cierre de votaciones: </span>{{Cartel.CierreVotacion}}</p>
+            <p><span style="font-weight:bold  ">Fecha de inicio: </span>{{Cartel.FechaInicio}}</p>
+            <p><span style="font-weight:bold">Fecha de finalización:</span> {{Cartel.FechaFinal}}</p>
           </div>
+        </div>
+      </div>
     </div>
+</div>
 
-    <ang-accordion>
-    <collapsible-item ng-repeat="categoria in Cartel.Categories" item-title="{{categoria.CategoriaNombre}}">
+  <ang-accordion>
+    <collapsible-item ng-repeat="categoria in Cartel.Categories" item-title="{{categoria.CategoriaNombre}}" >
       <div class="">
-        <div class="" ng-repeat="banda in categoria.Bandas">
+        <table class="table table-hover table-outline m-b-0 hidden-sm-down">
+          <thead class="thead-default">
+            <tr>
+              <th class="text-xs-center"><i class="icon-people"></i></th>
+              <th>Banda</th>
+              <th class="text-xs-center">Acumulado</th>
+              <th>Voto</th>
+            </tr>
+          </thead>
+          <tbody >
+          <!--<div class="">
           hola
-        </div>
+          </div>-->
+            <tr  ng-repeat="banda in categoria.Bandas">
+              <td><i class="fa fa-group fa-lg m-t-2"></i></td>
+              <td>{{banda.BandaNombre}}</td>
+              <td>{{banda.Acumulado}}<progress class="progress progress-xs progress-info m-t-1 m-b-0" value="{{banda.Acumulado}}" max="300">{{banda.Acumulado}}%</progress></td>
+              <td>input</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
     </collapsible-item>
-
-
-</ang-accordion>
-    <div class="categoria_style" ng-repeat="categoria in Cartel.Categories">
-      <div class="">
-
-        <button class="accordion" ng-click="changeIcon()">
-          <div class="contenedor">
-            <div class="contenedor">
-              <h3>{{categoria.CategoriaNombre}}</h3>
-              <div class="UpDownstyle" ng-show="UpDown">
-                    <i class="fa fa-angle-double-down fa-lg m-t-2" ></i>
-                </div>
-              <div class="UpDownstyle" ng-show="!UpDown">
-                    <i class="fa fa-angle-double-up fa-lg m-t-2" width=50 height=50></i>
-                </div>
-
-            </div>
-            <div class="toRight">
-              <h5 ng-show="!admi">dinero disponible: ${{categoria.dineroRestante}}</h5>
-            </div>
-          </div>
-          </button>
-          <div class="panel">
-            <div class="contenedor">
-              <div class="contenedor" ng-repeat="banda in Cartel.Categories.Bandas">
-                <img src="">
-                <h5>{{banda.NombreBanda}}</h5>
-                <div class="acomulado">
-                    <h5>Acumulado</h5>
-                </div>
-              </div>
-              <div class=toRight>
-                <div class="contenedor">
-                  <h6>Vota con $</h6>
-                  <input type="text" name="" value="0">
-                </div>
-                </div>
-              </div>
-            </div>
-            </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="toRight">
-        <button>Enviar Votación!</button>
-      </div>
-    </div>
-  </div>
+  </ang-accordion>
+</div>
