@@ -8990,6 +8990,11 @@ button.accordion.active, button.accordion:hover {
   flex-direction: row;
   justify-content: space-around; }
 
+.header_fes_car {
+  display: flex;
+  background: white;
+  align-items: strech; }
+
 .toRight {
   align-self: flex-end;
   /*padding-right: 5%;*/ }
