@@ -8,6 +8,7 @@ commonController.$inject = ['$scope','$http','$window'];
      sessionStorage.priv = "";
      $window.location.href = '/#!/login';
    }
+   $scope.priv = sessionStorage.priv;
    $scope.logout = function() {
      var Url = "http://myconcertv2.cloudapp.net/UserService.svc/logout/"+sessionStorage.user;
      $http({
