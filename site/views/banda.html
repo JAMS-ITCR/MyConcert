@@ -45,7 +45,7 @@ Bandas
           <small>Banda</small>
         </div>
         <div class="card-block">
-          <div data-ng-repeat="song in songs" class="form-control" id="band-name" >{{song.name}}</div>
+          <div data-ng-repeat="song in songs" class="form-control" id="band-name" >{{song.Nombre}}</div>
         </div>
       </div>
       <div class="card">
@@ -53,15 +53,22 @@ Bandas
               <strong>Estadísticas</strong>
               <small>de la banda.</small>
           </div>
-          <div class="card-block">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-               reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                 sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </div>
+          <div class="card">
+            <div class="card-header">
+                <i class="fa fa-asterisk icon-bg"></i>Votaciones
+                <div class="card-actions">
+                    <a href="http://jtblin.github.io/angular-chart.js/">
+                        <small class="text-muted">docs</small>
+                    </a>
+                </div>
+            </div>
+            <div class="card-block ng-scope">
+              <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;">
+              </iframe>
+                <canvas id="pie" class="chart chart-pie ng-isolate-scope" chart-data="[rating, 5-rating]" chart-labels="['votaciones','otros']" width="357" height="178" style="display: block; width: 357px; height: 178px;">
+                </canvas>
+            </div>
+        </div>
       </div>
     </div>
     <div class="col-sm-6">

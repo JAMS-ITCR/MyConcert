@@ -6,7 +6,7 @@ bandController.$inject = ['$scope','$http','$state'];
   $scope.data = "Hola pinche";
   console.log("bands");
   //get bandas
-  
+
 $scope.getArray =function (index){
 
   return new Array(index);
