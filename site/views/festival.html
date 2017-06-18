@@ -1,13 +1,46 @@
-<h1>
-Festival
-</h1>
-<div class="card">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua.
-     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-     commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <p> {{ data }}</p>
+<div class="" ng-controller="festivalController">
+  <div class="">
+    <div class="card card card-inverse card-primary">
+      <div class="card-header">
+        <h1 class="" align="center"> {{Festival.Nombre}}  </h1>
+      </div>
+    <div class="card-block  card-inverse card-primary header_fes_car">
+      <div class="card" style="margin:1%;">
+        <img width="300" height= "250" src= "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg">
+      </div>
+      <div class="card card-inverse card-primary"><!-- style="height:250px; margin:1%;" -->
+        <div class="card-header">
+          <h5>Información General</h5>
+        </div>
+        <div class="card-block center_img" >
+          <p><span style="font-weight:bold"> Lugar del evento: </span> {{Festival.Lugar}}, {{Festival.Pais}}</p>
+          <p><span style="font-weight:bold"> Fecha de inicio: </span>{{Festival.FechaInicio}}</p>
+          <p><span style="font-weight:bold"> Fecha de finalización: </span> {{Festival.FechaFinal}}</p>
+          <p><span style="font-weight:bold"> Transporte: </span> {{Festival.Transporte}}</p>
+          <p><span style="font-weight:bold"> Comida: </span> {{Festival.Comida}}</p>
+          <p><span style="font-weight:bold"> Servicios: </span> {{Festival.Servicios}}</p>
+        </div>
+      </div>
+      <div class="card card-inverse card-primary" style="margin-left:1%">
+        <div class="card-header">
+          <h5>Recomendación del Chef:</h5>
+        </div>
+        <div class="card-block center_img">
+            <p><span>Nombre: </span><span style="font-weight:bold"> {{Festival.Recomendacion.Nombre}} </span>
+            <p><span>Género: </span><span style="font-weight:bold"> {{Festival.Recomendacion.NombreGenero}} </span>
+            <p><span>Descripción: </span><span style="font-weight:bold"> {{Festival.Recomendacion.Nombre}} </span>
+          <div class="" style="align-self: center;">
+            <img src="http://www.rocksonico.com/nombre-de-tu-banda/images/banda.jpg" width="100" height="100">
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+
+ </div>
+  <div class="">
+    <h1>hola</h1>
+  </div>
 </div>

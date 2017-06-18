@@ -22,6 +22,10 @@ angular
         var newUrl = "/cartelera/"+item.IdCartelera;
         $location.url(newUrl);
       }
+      else{
+        var newUrl = "/festival/"+item.IdFestival;
+        $location.url(newUrl);
+      }
     };
 
     getAllInfo= function () {
@@ -58,13 +62,19 @@ angular
       url : FestivalURL
       }).then(function mysuccess(response){
       var ListaRaw = angular.fromJson(response.data.getFestivalsResult);
-      if($scope.admi){
-        CarteleraURL="";
+      var Filter=[];
+
+      for (var i = 0; i < ListaRaw.length; i++) {
+        var img = !(ListaRaw[i].hasOwnProperty("imagen"));
+        if(img){ListaRaw[i].imagen="/img/nodisponible.png";}
       }
-      else {
-        CarteleraURL="";
+      if(!$scope.admi){
+        for (var i = 0; i < ListaRaw.length; i++) {
+          if(ListaRaw[i].Estado==true){Filter.push(ListaRaw[i]);}
+        }
       }
-      $scope.lista_Festivales=ListaRaw;
+      else {Filter=ListaRaw;}
+      $scope.lista_Festivales=Filter;
 
       for (var i = 0; i < 3; i++) {
           $scope.mostrando_festivales[i]=$scope.lista_Festivales[i];
@@ -108,6 +118,7 @@ angular
         $scope.mostrando_festivales[i]=$scope.lista_Festivales[position_festivales[i]];
       }
     }
+
     $scope.CreateNew = function(isCartel){
       var newUrl="";
       if(isCartel){

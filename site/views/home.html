@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="plus">
-        <button class="" ng-show="admi" ng-click="CreateNew(true)"><img src="img/plus_icon.png" width="30" height="40"></button>
+        <button class="" ng-show="admi" ng-click="CreateNew(true)" width="100" heigh="100"><i class="fa fa-plus-square fa-lg m-t-2"></i></button>
       </div>
     </div>
 
@@ -26,20 +26,20 @@
       <h2>Festivales</h2>
       <div class="contenedor_home">
           <div class="boton">
-              <button ng-click="slidefestivales(false)"><img src="/img/arrowleft.png" width="50" height="50"></button>
+              <button ng-click="slidefestivales(false)"><i class="fa fa-chevron-left fa-lg m-t-2"></i></button>
           </div>
         <div class="contenedor_home">
           <div class="presenta3" ng-repeat="festival in mostrando_festivales">
-              <img ng-src="http://lorempixel.com/400/200/abstract/" width="300px" height="300px">
+              <img ng-src="{{festival.imagen}}" width="300px" height="300px" ng-click="selectItem(festival,false)">
               <h3>{{festival.Nombre}}</h3>
           </div>
         </div>
         <div class="boton">
-          <button ng-click="slidefestivales(true)"><img src="/img/arrowright.png" width="50" height="50" ></button>
+          <button ng-click="slidefestivales(true)"><i class="fa fa-chevron-right fa-lg m-t-2"></i></button>
         </div>
       </div>
       <div class="plus">
-        <button ng-show="admi"><img src="img/plus_icon.png" width="30" height="40"></button>
+        <button ng-show="admi"><i class="fa fa-plus-square fa-lg m-t-2"></i></button>
       </div>
     </div>
 

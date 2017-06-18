@@ -119,7 +119,11 @@ div.panel {
 .header_fes_car{
   display:flex;
   background: white;
-   align-items:strech}
+  .header{
+    align-items:strech;
+  }
+ }
+
   .toRight{
     align-self: flex-end;
     /*padding-right: 5%;*/
@@ -177,3 +181,7 @@ div.panel {
     margin: 2% 0 2% 0;
 
   }
+.center_img{
+  display: flex;
+  flex-direction: column;
+}

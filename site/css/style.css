@@ -8992,8 +8992,9 @@ button.accordion.active, button.accordion:hover {
 
 .header_fes_car {
   display: flex;
-  background: white;
-  align-items: strech; }
+  background: white; }
+  .header_fes_car .header {
+    align-items: strech; }
 
 .toRight {
   align-self: flex-end;
@@ -9043,3 +9044,7 @@ button.side_arrow {
   display: flex;
   justify-content: end;
   margin: 2% 0 2% 0; }
+
+.center_img {
+  display: flex;
+  flex-direction: column; }

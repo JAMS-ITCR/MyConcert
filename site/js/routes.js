@@ -157,12 +157,12 @@ angular
     templateUrl: 'views/pages/forgot.html'
   })
   .state('app.festival', {
-    url: '/festival',
+    url: '/festival/:festivalID',
     templateUrl: 'views/festival.html',
     ncyBreadcrumb: {
       label: 'Festivales'
     },
-    controller : ''
+    controller : 'festivalController'
   })
   .state('app.perfil', {
     url: '/perfil',
