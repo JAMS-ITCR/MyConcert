@@ -8,6 +8,32 @@ carteleraController.inject = ['$stateParams'];
 // Ejemplo para realizar pruebas mientras se sube el servicio
 
 function carteleraController($scope, $stateParams, $http){
+  $scope.ajust = function (value,banda,categoria){
+    var suma =0;
+    for (var i = 0; i < categoria.Bandas.length; i++) {
+      suma=suma+categoria.Bandas[i].money;
+    }
+    categoria.dineroRestante=categoria.dineroRestantebkp - suma;
+    if((categoria.dineroRestante!=0&&!categoria.dineroRestante)||categoria.dineroRestante<0){
+      alert("atención");
+      banda.money = 0;
+      suma=0;
+      for (var i = 0; i < categoria.Bandas.length; i++) {
+        suma=suma+categoria.Bandas[i].money;
+      }
+      categoria.dineroRestante=categoria.dineroRestantebkp - suma;
+
+    }
+    if (!angular.isUndefined(value)){
+    banda.Acumulado =   banda.backup + value;
+    categoria.dineroRestante = categoria.dineroRestante;
+    }else{
+      value = 0;
+    }
+    console.log("wtf",$scope.Cartel.Categories);
+    console.log("value",value,"banda.Acumulado", banda.Acumulado);
+
+  };
   $scope.admi=false;
   $scope.Cartel={};
   $scope.Cartel.idCartel=$stateParams.cartelID;
@@ -51,7 +77,6 @@ function carteleraController($scope, $stateParams, $http){
 		findCartelera = function(ListaRaw){
 			for (var i = 0; i < ListaRaw.length; i++) {
 				if(ListaRaw[i].IdCartelera==$scope.Cartel.idCartel){
-					console.log( "Este Raw se iguala a cartel "+ListaRaw[i]);
 					$scope.Cartel.Nombre=ListaRaw[i].Nombre;
           $scope.Cartel.Lugar=ListaRaw[i].Lugar;
           $scope.Cartel.CierreVotacion=ListaRaw[i].CierreVotacion;
@@ -66,35 +91,42 @@ function carteleraController($scope, $stateParams, $http){
 
     var filterCategory = function(ListaRaw){
       $scope.Cartel.Categories=[];
+      console.log(ListaRaw.length);
       for(i = 0; i < ListaRaw.length; i++){
-        if(ListaRaw[i].IdCartelera==$scope.Cartel.idCartel){
           var existeCat = true;
-          for (var j = 0; j < $scope.Cartel.Categories.length; i++) {
+          for (var j = 0; j < $scope.Cartel.Categories.length; j++) {
+            console.log($scope.Cartel.Categories[j].IdCategoria);
             if($scope.Cartel.Categories[j].IdCategoria==ListaRaw[i].IdCategoria){
-              existeCat=false;
+              existeCat = false;
               var newBanda = {
                 BandaNombre:ListaRaw[i].BandaNombre,
                 IdBanda:ListaRaw[i].IdBanda,
-                Acumulado: ListaRaw[i].Acumulado
+                Acumulado: ListaRaw[i].Acumulado,
+                money: 0,
+                backup: ListaRaw[i].Acumulado
               }
               $scope.Cartel.Categories[j].Bandas.push(newBanda);
               break;
-            }}
+            }
+          }
+
           if(existeCat){
             var newCate = {
               IdCategoria: ListaRaw[i].IdCategoria,
               CategoriaNombre:ListaRaw[i].CategoriaNombre,
               dineroRestante:100,
+              dineroRestantebkp:100,
               Bandas:[{
                   BandaNombre:ListaRaw[i].BandaNombre,
                   IdBanda:ListaRaw[i].IdBanda,
-                  Acumulado: ListaRaw[i].Acumulado
+                  Acumulado: ListaRaw[i].Acumulado,
+                  money: 0,
+                  backup: ListaRaw[i].Acumulado
 
                 }]
               };
-
+            console.log("Agregando nueva categoria"+newCate);
             $scope.Cartel.Categories.push(newCate);
-          }
         }
       }
     }
@@ -103,18 +135,4 @@ function carteleraController($scope, $stateParams, $http){
     getInfoCartelera();
 		getInfoCategorias();
 
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].onclick = function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight){
-          panel.style.maxHeight = null;
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + "px";
-        }
-      }
-    }
   };

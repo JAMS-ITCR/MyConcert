@@ -26,7 +26,7 @@
 </div>
 
   <ang-accordion>
-    <collapsible-item ng-repeat="categoria in Cartel.Categories" item-title="{{categoria.CategoriaNombre}}" >
+    <collapsible-item ng-repeat="categoria in Cartel.Categories" item-title="{{categoria.CategoriaNombre}}  disponibles: ${{categoria.dineroRestante}}" >
       <div class="">
         <table class="table table-hover table-outline m-b-0 hidden-sm-down">
           <thead class="thead-default">
@@ -45,11 +45,15 @@
               <td><i class="fa fa-group fa-lg m-t-2"></i></td>
               <td>{{banda.BandaNombre}}</td>
               <td>{{banda.Acumulado}}<progress class="progress progress-xs progress-info m-t-1 m-b-0" value="{{banda.Acumulado}}" max="300">{{banda.Acumulado}}%</progress></td>
-              <td>input</td>
+              <td><input  class="vote-input"type="number"ng-model="banda.money" ng-change="ajust(banda.money,banda,categoria)" min="0" max="100" name="" value="0"></td>
             </tr>
           </tbody>
         </table>
       </div>
     </collapsible-item>
+    <div class="send-vote-buttom">
+      <button type="button" class="btn btn-primary"><i class="fa fa-star"></i>&nbsp; Enviar</button>      
+    </div>
+
   </ang-accordion>
 </div>

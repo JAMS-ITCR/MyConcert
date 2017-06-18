@@ -9004,3 +9004,42 @@ button.accordion.active, button.accordion:hover {
 
 .UpDownstyle {
   margin-left: 10px; }
+
+.show_items {
+  align-items: center;
+  display: inline-flex; }
+
+button.side_arrow {
+  margin: 90px 0px 0px 0px;
+  vertical-align: top; }
+
+.plus {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 15%; }
+
+.disponible {
+  margin-right: 10px; }
+
+.contenedor2 {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column; }
+
+.contenedor_home {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  align-content: center; }
+
+.presenta3 {
+  margin: 10px; }
+
+.vote-input {
+  width: 20%; }
+
+.send-vote-buttom {
+  display: flex;
+  justify-content: end;
+  margin: 2% 0 2% 0; }
