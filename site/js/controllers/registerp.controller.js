@@ -37,20 +37,21 @@ registerpController.$inject = ['$scope','$http','$window', '$mdDialog'];
      }).then(
       function (data){
         console.log("CREATE USER", data.data);
-        switch (angular.fromJson(data.data.createUserResult)) {
+        var response = angular.fromJson(data.data.createUserResult);
+        switch (response.id) {
           case 100:
             sessionStorage.user=user.nicknameUser;
-            sessionStorage.priv=user.roleUser==1 ? "Admin" : "Fan";
+            sessionStorage.priv=user.roleUser==1 ? "admin" : "fan";
             $scope.msj = "";
             $window.location.href = '/#!/home';
             break;
           default:
-            $scope.msj = data.data.createUserResult.info;
+            $scope.msj =response.info;
         }
       },
       function (error){
-        console.erro("CREATE USER",error);
-        $scope.msj = data.data.createUserResult.info;
+        console.error("CREATE USER",error);
+        $scope.msj = response.info;
       }
     );
         $scope.count += 1;
