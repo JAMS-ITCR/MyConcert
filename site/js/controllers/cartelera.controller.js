@@ -9,8 +9,8 @@ carteleraController.inject = ['$stateParams'];
 
 function carteleraController($scope, $stateParams, $http){
   $scope.admi=false;
-  $scope.idCartel=$stateParams.cartelID;
-	$scope.Cartel={};
+  $scope.Cartel={};
+  $scope.Cartel.idCartel=$stateParams.cartelID;
 	$scope.UpDown=true;
 	$scope.changeIcon= function(){
 		if ($scope.UpDown) {
@@ -37,27 +37,65 @@ function carteleraController($scope, $stateParams, $http){
     };
 		//servicio para obtener los datos de las bandas por categorías
 		getInfoCategorias = function(){
-			//$scope.idCartel para obtener id cartelera
 			$http({
         method: "GET",
-        url: ""
+        url: "http://myconcertv2.cloudapp.net//PEDS/BandsService.svc/bandsbillboards?idcartelera="+$scope.Cartel.idCartel
       }).then(function mysuccess(response){
+        var ListaRaw= angular.fromJson(response.data.getBandasXCategoriaXCarteleraResult);
+        filterCategory(ListaRaw);
       },function myerror (response){
         $scope.info = "Request fallido "+ response.statusText;
       });
 		}
 
 		findCartelera = function(ListaRaw){
-			var id = $scope.idCartel;
-			console.log(id);
 			for (var i = 0; i < ListaRaw.length; i++) {
-				if(ListaRaw[i].IdCartelera==id){
-					console.log(ListaRaw[i]);
-					$scope.Cartel=ListaRaw[i];
+				if(ListaRaw[i].IdCartelera==$scope.Cartel.idCartel){
+					console.log( "Este Raw se iguala a cartel "+ListaRaw[i]);
+					$scope.Cartel.Nombre=ListaRaw[i].Nombre;
+          $scope.Cartel.Lugar=ListaRaw[i].Lugar;
+          $scope.Cartel.CierreVotacion=ListaRaw[i].CierreVotacion;
+          $scope.Cartel.Estado=ListaRaw[i].Estado;
+          $scope.Cartel.FechaInicio=ListaRaw[i].FechaInicio;
+          $scope.Cartel.FechaFinal=ListaRaw[i].FechaFinal;
+          $scope.Cartel.NombrePais=ListaRaw[i].NombrePais;
 					break;
 				}
 			}
 		}
+
+    var filterCategory = function(ListaRaw){
+      $scope.Cartel.Categories=[];
+      for(i = 0; i < ListaRaw.length; i++){
+        if(ListaRaw[i].IdCartelera==$scope.Cartel.idCartel){
+          var existeCat = true;
+          for (var j = 0; j < $scope.Cartel.Categories.length; i++) {
+            if($scope.Cartel.Categories[j].IdCategoria==ListaRaw[i].IdCategoria){
+              existeCat=false;
+              var newBanda = {
+                BandaNombre:ListaRaw[i].BandaNombre,
+                IdBanda:ListaRaw[i].IdBanda
+              }
+              $scope.Cartel.Categories[j].Bandas.push(newBanda);
+              break;
+            }}
+          if(existeCat){
+            var newCate = {
+              IdCategoria: ListaRaw[i].IdCategoria,
+              CategoriaNombre:ListaRaw[i].CategoriaNombre,
+              dineroRestante:100,
+              Bandas:[{
+                  BandaNombre:ListaRaw[i].BandaNombre,
+                  IdBanda:ListaRaw[i].IdBanda
+                }]
+              };
+
+            $scope.Cartel.Categories.push(newCate);
+          }
+        }
+      }
+    }
+
 		//Se llama a la function
     getInfoCartelera();
 		getInfoCategorias();

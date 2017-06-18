@@ -26,7 +26,7 @@ angular
 
     getAllInfo= function () {
       var CarteleraURL = "http://myconcertv2.cloudapp.net/PEDS/BillboardServices.svc/billboards";
-      var FestivalURL = "http://myconcertv2.cloudapp.net/PEDS/BillboardServices.svc/billboards"
+      var FestivalURL = "http://myconcertv2.cloudapp.net/PEDS/BillboardServices.svc/festivals"
 
         $http({
         method : "GET",
@@ -40,6 +40,12 @@ angular
           CarteleraURL="";
         }
           $scope.lista_Cartelera=ListaRaw;
+          for (var i = 0; i < $scope.lista_Cartelera.length; i++) {
+            var img = !($scope.lista_Cartelera[i].hasOwnProperty("imagen"));
+            if(img){
+              $scope.lista_Cartelera[i].imagen="/img/nodisponible.png";
+            }
+          }
           for (var i = 0; i < 3; i++) {
             $scope.mostrando_cartelera[i]=$scope.lista_Cartelera[i];
           }
@@ -51,7 +57,7 @@ angular
       method : "GET",
       url : FestivalURL
       }).then(function mysuccess(response){
-      var ListaRaw = angular.fromJson(response.data.getBillBoardResult);
+      var ListaRaw = angular.fromJson(response.data.getFestivalsResult);
       if($scope.admi){
         CarteleraURL="";
       }
@@ -59,6 +65,7 @@ angular
         CarteleraURL="";
       }
       $scope.lista_Festivales=ListaRaw;
+
       for (var i = 0; i < 3; i++) {
           $scope.mostrando_festivales[i]=$scope.lista_Festivales[i];
       }
@@ -111,6 +118,7 @@ angular
       }
       $location.url(newUrl);
     }
+
     getAllInfo();
 
 

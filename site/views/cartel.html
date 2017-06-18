@@ -1,32 +1,33 @@
 
 <div ng-controller="carteleraController">
-  <div class="card card">
-    <div class="card-header">
-        <h1 class="" align="center"> {{Cartel.Nombre}} </h1>
+    <h1 class="" align="center"> {{Cartel.Nombre}} </h1>
+    <div class="contenedor">
+      <div class="header_fes_car">
+          <div class="">
+              <img width="300" height= "250" src= "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg">
+          </div>
+          <div class="">
+            <div class="card">
+                    <div class="card-header">
+                        <h5>Información General</h5>
+                    </div>
+                    <div class="card-block">
+                      <h5> Lugar del evento: {{Cartel.Lugar}}, {{Cartel.NombrePais}}</h5>
+                      <h5>Cierre de votaciones: {{Cartel.CierreVotacion}}</h5>
+                      <h5>Fecha de inicio: {{Cartel.FechaInicio}}</h5>
+                      <h5>Fecha de finalización: {{Cartel.FechaFinal}}</h5>
+                    </div>
+               </div>
+             </div>
+          </div>
     </div>
-    <div class="card-block">
 
-      <div align="center">
-        <img align="center" width="300" height= "300" src= "https://dancettradio.files.wordpress.com/2012/01/festivalimperial_1-scaled10001.jpg">
-        <h4 align="center">
-               Lugar del evento: {{Cartel.Lugar}}, {{Cartel.NombrePais}} <br>
-               Cierre de votaciones: {{Cartel.CierreVotacion}}<br>
-               Fecha de inicio: {{Cartel.FechaInicio}}<br>
-               Fecha de finalización: {{Cartel.FechaFinal}}
-             </h4>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
-
-
-    <div class="categoria_style">
+    <div class="categoria_style" ng-repeat="categoria in Cartel.Categories">
       <div class="">
         <button class="accordion" ng-click="changeIcon()">
           <div class="contenedor">
             <div class="contenedor">
-              <label>Categoría</label>
+              <h3>{{categoria.CategoriaNombre}}</h3>
               <div class="UpDownstyle" ng-show="UpDown">
                     <i class="fa fa-angle-double-down fa-lg m-t-2" ></i>
                 </div>
@@ -36,15 +37,15 @@
 
             </div>
             <div class="toRight">
-              <h5 ng-show="!admi">dinero disponible: ${{}}</h5>
+              <h5 ng-show="!admi">dinero disponible: ${{categoria.dineroRestante}}</h5>
             </div>
           </div>
           </button>
           <div class="panel">
             <div class="contenedor">
-              <div class="contenedor">
+              <div class="contenedor" ng-repeat="banda in Cartel.Categories.Bandas">
                 <img src="">
-                <h5>Nombre de la Banda</h5>
+                <h5>{{banda.NombreBanda}}</h5>
                 <div class="acomulado">
                     <h5>Acumulado</h5>
                 </div>
