@@ -1,0 +1,105 @@
+<h1>
+Bandas
+</h1>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header peds-name-stars">
+          <strong>Detalle de la Banda   <small>Form</small></strong>
+          <div class="stars-band">
+            <i class="fa fa-star fa-lg m-t-2 peds-star"  ng-repeat="star in stars"></i>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class=" form-group row">
+            <div class="row band-name">
+              <div class="col-sm-12 peds-input-name">
+                <label for="city">Nombre</label>
+                <div class="form-control" id="band-name" >{{banda.Nombre}}</div>
+              </div>
+              <!--<div class="col-sm-2">
+                <button type="button" class="btn btn-primary peds-button-name"><i class="fa fa-star"></i>&nbsp; Agregar banda</button>
+              </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/col-->
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+          <div class="card-header">
+              <strong>Integrantes de la Banda</strong>
+              <small>Banda</small>
+          </div>
+          <div class="card-block">
+            <div data-ng-repeat="member in members" class="form-control" id="band-name" >{{member.Nombre}}</div>
+          </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <strong>Canciones principlaes</strong>
+          <small>Banda</small>
+        </div>
+        <div class="card-block">
+          <div data-ng-repeat="song in songs" class="form-control" id="band-name" >{{song.name}}</div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="card-header">
+              <strong>Estadísticas</strong>
+              <small>de la banda.</small>
+          </div>
+          <div class="card-block">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+               reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                 sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+          <div class="card-header">
+              <strong>Imágenes</strong>
+              <small>de la banda.</small>
+          </div>
+          <div class="card-block">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+               reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                 sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <strong>Comentarios</strong>
+          <small>de los fanáticos.</small>
+        </div>
+        <div class="card-block">
+            <div  data-ng-repeat="comment in comments" class="form-control" id="band-name" >
+              <div class="card-block">
+                    <div class="h1 text-muted text-xs-right m-b-2">
+                        <i class="icon-speech"></i>
+                        <p style="font-size:0.47em;"> Usuario: {{comment.IdUsuario}}</p>
+                        <p style="font-size:0.47em;"> {{comment.Contenido}}</p>
+                    </div>
+                    <div class="h4 m-b-0">{{comment.Rating}}</div>
+                    <small class="text-muted text-uppercase font-weight-bold">Comments</small>
+                    <progress class="progress progress-xs progress-info m-t-1 m-b-0" value="0" max="5">{{comment.Rating}}</progress>
+                </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--/col-->

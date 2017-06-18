@@ -8919,6 +8919,34 @@ hr.transparent {
   *[dir="rtl"] .callout-success {
     border-right-color: #4dbd74; }
 
+.band-name {
+  display: felx;
+  align-items: flex-end;
+  width: 100%; }
+
+fieldset {
+  background: #FCFCFC;
+  padding: 16px;
+  border: 1px solid #D5D5D5; }
+
+.addfields {
+  margin: 10px 0; }
+
+i.peds-star {
+  color: #1985AC;
+  margin: 3px; }
+
+.peds-name-stars {
+  display: flex;
+  justify-content: space-between; }
+
+.peds-button {
+  margin-top: 1.2%; }
+
+.peds-button-name {
+  margin-left: 12px;
+  margin-top: 5px; }
+
 .error {
   color: red; }
 

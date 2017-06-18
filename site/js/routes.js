@@ -123,6 +123,18 @@ angular
     },
     controller : 'bandController'
   })
+  .state('app.bandas-banda', {
+    url: '/bandas/:id/:rating',
+    templateUrl: 'views/banda.html',
+    ncyBreadcrumb: {
+      label: 'Banda'
+    },
+    params :{
+      id : '0',
+      rating: ''
+    },
+    controller : 'mybandController'
+  })
   .state('app.home', {
     url: '/home',
     templateUrl: 'views/home.html',

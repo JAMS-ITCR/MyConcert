@@ -1,13 +1,24 @@
 <h1>
-Bands
+Bandas
 </h1>
-<div class="card">
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua.
-     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-     commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur.
-    Excepteur sint occaecat cupidatat non proident,
-    sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <p> {{ data }}</p>
-</div>
+
+  <div class="row">
+
+  <div class="col-sm-12" ng-repeat="banda in bandas"  >
+    <a ui-sref="app.bandas-banda({'id':banda.IdBanda,'rating': banda.Rating})">
+      <div class="card">
+        <div class="card-header peds-name-stars">
+          <strong>{{banda.Nombre}}  <span ng-hide="banda.Estado" style="color: red;" >Desactivada</span></strong>
+            <div class="stars-band">
+              <i class="fa fa-star fa-lg m-t-2 peds-star"  ng-repeat="star in  getArray(banda.Rating)  track by $index "></i>
+            </div>
+          </div>
+      </div>
+    </a>
+  </div>
+
+  </div>
+  <!--/col-->
+
+
+  <!--/col-->
