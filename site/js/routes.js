@@ -162,7 +162,7 @@ angular
     ncyBreadcrumb: {
       label: 'Festivales'
     },
-    controller : ''
+    controller : 'festivalController'
   })
   .state('app.perfil', {
     url: '/perfil',
