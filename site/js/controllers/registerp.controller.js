@@ -19,6 +19,7 @@ registerpController.$inject = ['$scope','$http','$window', '$mdDialog'];
        photoUser:'',
        descriptionUser:''
      };
+   $scope.genres=[];
    $scope.repass = '';
    $scope.validPass = false;
    $scope.msj = "";
@@ -26,7 +27,6 @@ registerpController.$inject = ['$scope','$http','$window', '$mdDialog'];
        $window.location.href = '/#!/home';
    }
    $scope.register = function(user) {
-     console.log(user);
      $http({
         method: 'POST',
         url: 'http://myconcertv2.cloudapp.net/UserService.svc/user',
@@ -36,13 +36,13 @@ registerpController.$inject = ['$scope','$http','$window', '$mdDialog'];
        params : user
      }).then(
       function (data){
-        console.log("CREATE USER", data.data);
         var response = angular.fromJson(data.data.createUserResult);
         switch (response.id) {
           case 100:
             sessionStorage.user=user.nicknameUser;
             sessionStorage.priv=user.roleUser==1 ? "admin" : "fan";
             $scope.msj = "";
+            $scope.postGenres();
             $window.location.href = '/#!/home';
             break;
           default:
@@ -54,7 +54,27 @@ registerpController.$inject = ['$scope','$http','$window', '$mdDialog'];
         $scope.msj = response.info;
       }
     );
-        $scope.count += 1;
+    };
+    $scope.isValidData = function(user) {
+      if(user.roleUser==1){
+        if(user.nameUser && user.surname1User && user.surname2User
+          && user.nicknameUser && user.mailUser && user.passUser &&
+           user.passUser == $scope.repass){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }else{
+        if(user.nameUser && user.surname1User && user.surname2User
+          && user.nicknameUser && user.mailUser && user.passUser && 
+          user.passUser == $scope.repass && user.countryUser 
+          && user.phoneUser && user.birthdateUser && $scope.genres.length >= 5){
+          return true;
+        }else{
+          return false;
+        }
+      }
     };
     $scope.addGenre = function(ev) {
       $mdDialog.show({
@@ -76,6 +96,62 @@ registerpController.$inject = ['$scope','$http','$window', '$mdDialog'];
        var index=$scope.genres.indexOf(data);
        $scope.genres.splice(index, 1);
     };
+    $scope.postGenres = function() {
+      var param = {nusuario:$scope.user.nicknameUser}
+      var id=0;
+      $http({
+          method: 'GET',
+          url: 'http://myconcertv2.cloudapp.net/UserService.svc/user/nuser',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8'
+          },
+         params : param
+       }).then (
+        function (data) {
+          id= angular.fromJson(data.data.getIdByNombreUsuarioResult).value;
+          console.log("reps", $scope.genres);
+          for(var i=0; i < $scope.genres.length; i++){
+            var genreJson = {
+                          idusuario : id, 
+                          idgenero :  $scope.genres[i].IdGenero
+                        };
+            console.log("scope json", $scope.genres[i]);
+            console.log("json" , genreJson);
+            console.log("iterator", i);
+            $scope.postGenresAux(genreJson);
+          }
+        },
+        function (error){
+          console.error(error);
+        }
+      );
+    };
+    $scope.postGenresAux = function(param){
+       $http({
+         method: 'POST',
+         url: 'http://myconcertv2.cloudapp.net/UserService.svc/fan/gender',
+         headers: {
+             'Content-Type': 'application/x-www-form-urlencoded; charse=UTF-8'
+         },
+        params : param
+      }).then(
+       function (data){
+         console.log(data);
+         var response = angular.fromJson(data.data.asignarGeneroFanaticoResult);
+         switch (response.id) {
+           case 100:
+             $scope.msj = "";
+             break;
+           default:
+             $scope.msj =response.info;
+             console.log(response);
+         }
+       },
+       function (error){
+         console.error("AddGenre",error);
+         $scope.msj = response.info;
+       });
+    };
     getcountries = function() {
       var Url = "http://myconcertv2.cloudapp.net/CountriesService.svc/countries";
       $http({
@@ -86,7 +162,7 @@ registerpController.$inject = ['$scope','$http','$window', '$mdDialog'];
           $scope.countries = angular.fromJson(data.data.getCountriesResult);
         },
         function (error){
-          console.error(data);
+          console.error(error);
         }
       );
     };
@@ -103,7 +179,7 @@ function dialogGenreController($scope, $http, $mdDialog) {
          $scope.allGenres = angular.fromJson(data.data.getGendersResult);
        },
        function (error){
-         console.error(data);
+         console.error(error);
        }
      );
   $scope.hide = function() {
